@@ -1,0 +1,55 @@
+---
+layout: default
+title: Home
+---
+<div class="column">
+  <div class="row">
+    <ul id="seafoodList">
+    {% for seafood in site.data.dishes.seafood %}
+      <li class="seafood" style="display: none;">{{ seafood }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+
+  <div class="row">
+    <ul id="meatList">
+    {% for meat in site.data.dishes.meat %}
+      <li class="meat" style="display: none;">{{ meat }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+
+  <div class="row">
+    <ul id="vegeList">
+    {% for vege in site.data.dishes.vege %}
+      <li class="vege" style="display: none;">{{ vege }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+<script>
+  dish_types = ['seafood', 'meat', 'vege']
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  function updateList(dish_type, quantity){
+    listItems = document.getElementsByClassName(dish_type)
+    listItemIdx = [...Array(listItems.length).keys()]
+    shuffleArray(listItemIdx)
+    dishTypeList = document.getElementById(dish_type + 'List')
+    newItems = '<li class="' + dish_type + '">' + listItems[listItemIdx[0]].innerHTML + '</li>'
+    if(quantity==2){
+      newItems += '<li class="' + dish_type + '">' + listItems[listItemIdx[1]].innerHTML + '</li>'
+    }
+    dishTypeList.innerHTML = newItems
+  }
+
+  updateList(dish_types[0], 1)
+  updateList(dish_types[1], 2)
+  updateList(dish_types[2], 1)
+
+</script>
