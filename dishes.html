@@ -11,33 +11,21 @@ title: 今晚食咩餸?
     return e('div', {class: 'card'}, [
       e('img', {class: 'card-img-top', src: './assets/placeholder.jpg'}, null),
       e('div', {class: 'card-body'}, [
-        e('h5', {class: 'card-title'}, props.title)
+        e('button', {type: 'button', class: 'btn btn-outline-secondary d-flex justify-content-center align-content-between float-end'}, [
+          e('i', {class: 'material-icons md-18'}, 'refresh'),
+          e('span', null, '重抽')
+        ]),
+        e('h3', {class: 'card-title'}, props.title)
       ])
     ])
   }
 
-
-  const seafoodCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
-    e(Card, {title: 'seafood'})
-  ])
-  const meatCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
-    e(Card, {title: 'meat1'}),
-    e(Card, {title: 'meat2'})
-  ])
-  const vegeCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
-    e(Card, {title: 'vege'})
-  ])
-  const mainRow = e('div', 
-    {'class': 'row'}, 
-    seafoodCol,
-    meatCol,
-    vegeCol
-    );
-  
-  ReactDOM.render(
-    mainRow,
-    document.getElementById('max-site')
-  )
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
 
   fetch('./dishes.json', {
     headers: {
@@ -47,6 +35,35 @@ title: 今晚食咩餸?
   }).then(function(response){
     return response.json()
   }).then(function(dishes_json){
+    var seafood_dishes = dishes_json.seafood
+    var meat_dishes = dishes_json.meat
+    var vege_dishes = dishes_json.vege
     console.log(dishes_json)
+
+    shuffleArray(seafood_dishes)
+    shuffleArray(meat_dishes)
+    shuffleArray(vege_dishes)
+
+    const seafoodCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+      e(Card, {title: seafood_dishes[0]})
+    ])
+    const meatCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+      e(Card, {title: meat_dishes[0]}),
+      e(Card, {title: meat_dishes[1]})
+    ])
+    const vegeCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+      e(Card, {title: vege_dishes[0]})
+    ])
+    const mainRow = e('div', 
+      {'class': 'row'}, 
+      seafoodCol,
+      meatCol,
+      vegeCol
+      );
+  
+    ReactDOM.render(
+      mainRow,
+      document.getElementById('max-site')
+    )
   });
 </script>
