@@ -1,0 +1,52 @@
+---
+layout: default
+title: 今晚食咩餸?
+---
+<script>
+  const e = React.createElement;
+
+  const header1 = e('h1', null, 'Hello, world!')
+
+  function Card(props){
+    return e('div', {class: 'card'}, [
+      e('img', {class: 'card-img-top', src: './assets/placeholder.jpg'}, null),
+      e('div', {class: 'card-body'}, [
+        e('h5', {class: 'card-title'}, props.title)
+      ])
+    ])
+  }
+
+
+  const seafoodCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+    e(Card, {title: 'seafood'})
+  ])
+  const meatCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+    e(Card, {title: 'meat1'}),
+    e(Card, {title: 'meat2'})
+  ])
+  const vegeCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+    e(Card, {title: 'vege'})
+  ])
+  const mainRow = e('div', 
+    {'class': 'row'}, 
+    seafoodCol,
+    meatCol,
+    vegeCol
+    );
+  
+  ReactDOM.render(
+    mainRow,
+    document.getElementById('max-site')
+  )
+
+  fetch('./dishes.json', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).then(function(response){
+    return response.json()
+  }).then(function(dishes_json){
+    console.log(dishes_json)
+  });
+</script>
