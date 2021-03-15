@@ -16,7 +16,7 @@ title: 今晚食咩餸?
 
   function Card(props){
     const [dishes, setDishes] = useState(props.title)
-    
+
     function reDraw(e){
       e.preventDefault();
       temp_d = dishes
@@ -25,7 +25,7 @@ title: 今晚食咩餸?
     }
 
     return e('div', {class: 'card'}, [
-      // e('img', {class: 'card-img-top', src: './assets/placeholder.jpg'}, null),
+      e('img', {class: 'card-img-top', src: `./assets/${dishes[0]}.jpg`, onError: (e) => e.target.src="./assets/placeholder.jpg"}, null),
       e('div', {class: 'card-body'}, [
         e('button', {type: 'button', class: 'btn btn-outline-secondary d-flex justify-content-center align-content-between float-end',
             onClick: reDraw
@@ -48,11 +48,13 @@ title: 今晚食咩餸?
   }).then(function(dishes_json){
     var seafood_dishes = dishes_json.seafood
     var meat_dishes = dishes_json.meat
+    var meat_dishes_2 = [...dishes_json.meat]
     var vege_dishes = dishes_json.vege
     console.log(dishes_json)
 
     shuffleArray(seafood_dishes)
     shuffleArray(meat_dishes)
+    shuffleArray(meat_dishes_2)
     shuffleArray(vege_dishes)
 
     const seafoodCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
@@ -60,7 +62,7 @@ title: 今晚食咩餸?
     ])
     const meatCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
       e(Card, {title: meat_dishes}),
-      e(Card, {title: meat_dishes})
+      e(Card, {title: meat_dishes_2})
     ])
     const vegeCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
       e(Card, {title: vege_dishes})
