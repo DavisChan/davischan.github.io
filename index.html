@@ -25,7 +25,7 @@ title: 今晚食咩餸?
     }
 
     return e('div', {class: 'card'}, [
-      e('img', {class: 'card-img-top', src: `./assets/${dishes[0]}.jpg`, onError: (e) => e.target.src="./assets/placeholder.jpg"}, null),
+      e('img', {class: 'card-img-top', src: `./assets/resized-${dishes[0]}.jpg`, onError: (e) => e.target.src="./assets/resized-placeholder.jpg"}, null),
       e('div', {class: 'card-body'}, [
         e('button', {type: 'button', class: 'btn btn-outline-secondary d-flex justify-content-center align-content-between float-end',
             onClick: reDraw
