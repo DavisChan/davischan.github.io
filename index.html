@@ -33,7 +33,7 @@ title: 今晚食咩餸?
           e('i', {class: 'material-icons md-18'}, 'refresh'),
           e('span', null, '重抽')
         ]),
-        e('h3', {class: 'card-title'}, dishes[0])
+        e('h5', {class: 'card-title'}, dishes[0])
       ])
     ])
   }
@@ -57,21 +57,27 @@ title: 今晚食咩餸?
     shuffleArray(meat_dishes_2)
     shuffleArray(vege_dishes)
 
-    const seafoodCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+    const seafoodCol = e('div', {'class': 'col-6 col-md-4'}, [
       e(Card, {title: seafood_dishes})
     ])
-    const meatCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
-      e(Card, {title: meat_dishes}),
-      e(Card, {title: meat_dishes_2})
+    const meatCol = e('div', {'class': 'col-12 col-md-4'}, [
+      e('div', {class: 'row'},[
+        e('div', {class: 'col-6 col-md-12'},
+          e(Card, {title: meat_dishes}),
+        ),
+        e('div', {class: 'col-6 col-md-12'},
+          e(Card, {title: meat_dishes_2})
+        )
+      ])
     ])
-    const vegeCol = e('div', {'class': 'col-sm-12 col-md-4'}, [
+    const vegeCol = e('div', {'class': 'col-6 col-md-4'}, [
       e(Card, {title: vege_dishes})
     ])
     const mainRow = e('div', 
       {'class': 'row'},
       e('h1', null, '今晚食咩餸'),
-      seafoodCol,
       meatCol,
+      seafoodCol,
       vegeCol
       );
   
