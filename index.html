@@ -9,6 +9,11 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
 
   const e = React.createElement;
 
+  var meat_1 = ""
+  var meat_2 = ""
+  var fish_1 = ""
+  var vege_1 = ""
+
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -80,7 +85,8 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
       e('h1', null, '今晚食咩餸'),
       meatCol,
       seafoodCol,
-      vegeCol
+      vegeCol,
+      e('a', {href: 'https://t.me/share/url?url='+document.URL+'&text={text}', class: 'btn btn-link', role: 'button', id: 'share_btn'}, 'Share')
       );
   
     ReactDOM.render(
