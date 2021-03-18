@@ -21,6 +21,12 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
     }
   }
 
+  function getShareTxt(e){
+    dishes_txt = Array.from(document.getElementsByClassName('card-title')).map(x => x.innerHTML).join(', ')
+    base_url = 'https://t.me/share/url?url='+document.URL+'&text='
+    document.getElementById('share_btn').href = base_url + dishes_txt
+  }
+
   function Card(props){
     const [dishes, setDishes] = useState(props.title)
 
@@ -29,6 +35,7 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
       temp_d = dishes
       shuffleArray(temp_d)
       setDishes([...temp_d])
+      getShareTxt()
     }
 
     return e('div', {class: 'card'}, [
@@ -80,13 +87,14 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
     const vegeCol = e('div', {'class': 'col-6 col-md-4'}, [
       e(Card, {title: vege_dishes})
     ])
+    
     const mainRow = e('div', 
       {'class': 'row'},
       e('h1', null, '今晚食咩餸'),
       meatCol,
       seafoodCol,
       vegeCol,
-      e('a', {href: 'https://t.me/share/url?url='+document.URL+'&text={text}', class: 'btn btn-link', role: 'button', id: 'share_btn'}, 'Share')
+      e('a', {onClick: getShareTxt, href: 'https://t.me/share/url?url='+document.URL+'&text={text}', class: 'btn btn-link', role: 'button', id: 'share_btn'}, 'Share')
       );
   
     ReactDOM.render(
