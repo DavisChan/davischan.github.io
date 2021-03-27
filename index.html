@@ -36,10 +36,10 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
     return e('div', {class: 'card m-1'}, [
       e('img', {class: 'card-img-top', src: `./assets/resized-${dishes[0]}.jpg`, onError: (e) => e.target.src="./assets/resized-placeholder.jpg"}, null),
       e('div', {class: 'card-body'}, [
-        e('button', {type: 'button', class: 'btn btn-sm btn-outline-secondary d-flex justify-content-center align-content-between float-end',
+        e('button', {type: 'button', class: 'btn btn-sm btn-outline-secondary float-end',
             onClick: reDraw
           }, [
-          e('i', {class: 'material-icons md-18'}, 'refresh'),
+          e('i', {class: 'bi bi-arrow-clockwise'}, null),
           e('span', null, '重抽')
         ]),
         e('p', {class: 'card-text'}, dishes[0])
