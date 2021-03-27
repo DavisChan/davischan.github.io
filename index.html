@@ -17,7 +17,7 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
   }
 
   function getShareTxt(e){
-    dishes_txt = Array.from(document.getElementsByClassName('card-title')).map(x => x.innerHTML).join(', ')
+    dishes_txt = Array.from(document.getElementsByClassName('card-text')).map(x => x.innerHTML).join(', ')
     base_url = 'https://t.me/share/url?url='+document.URL+'&text='
     document.getElementById('share_btn').href = base_url + dishes_txt
   }
@@ -33,16 +33,16 @@ image: "https://davischan.github.io/assets/resized-placeholder.jpg"
       getShareTxt()
     }
 
-    return e('div', {class: 'card'}, [
+    return e('div', {class: 'card m-1'}, [
       e('img', {class: 'card-img-top', src: `./assets/resized-${dishes[0]}.jpg`, onError: (e) => e.target.src="./assets/resized-placeholder.jpg"}, null),
       e('div', {class: 'card-body'}, [
-        e('button', {type: 'button', class: 'btn btn-outline-secondary d-flex justify-content-center align-content-between float-end',
+        e('button', {type: 'button', class: 'btn btn-sm btn-outline-secondary d-flex justify-content-center align-content-between float-end',
             onClick: reDraw
           }, [
           e('i', {class: 'material-icons md-18'}, 'refresh'),
           e('span', null, '重抽')
         ]),
-        e('h5', {class: 'card-title'}, dishes[0])
+        e('p', {class: 'card-text'}, dishes[0])
       ])
     ])
   }
